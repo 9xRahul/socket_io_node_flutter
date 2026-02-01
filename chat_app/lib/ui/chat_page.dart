@@ -5,6 +5,8 @@ import '../state/chat_provider.dart';
 class ChatPage extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
 
+  ChatPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final chat = context.watch<ChatProvider>();
