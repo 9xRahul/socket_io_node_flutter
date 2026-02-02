@@ -14,6 +14,7 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (roomId) => {
     socket.join(roomId);
+    console.log(socket.id, "joined", roomId);
   });
 
   socket.on("send_message", (data) => {
@@ -21,15 +22,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("typing", (roomId) => {
+    console.log(socket.id, "typing in", roomId);
     socket.to(roomId).emit("typing");
   });
 
   socket.on("stop_typing", (roomId) => {
     socket.to(roomId).emit("stop_typing");
-  });
-
-  socket.on("disconnect", () => {
-    console.log("Disconnected:", socket.id);
   });
 });
 
