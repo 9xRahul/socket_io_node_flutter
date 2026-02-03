@@ -12,7 +12,33 @@ class ChatPage extends StatelessWidget {
     final chat = context.watch<ChatProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: Text("Socket.IO Chat")),
+      appBar: AppBar(
+        title: Consumer<ChatProvider>(
+          builder: (_, chat, __) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Socket.IO Chat"),
+              Row(
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: chat.isUserOnline ? Colors.green : Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  SizedBox(width: 6),
+                  Text(
+                    chat.isUserOnline ? "Online" : "Offline",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(

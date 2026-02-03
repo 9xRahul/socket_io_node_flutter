@@ -8,6 +8,7 @@ class ChatProvider extends ChangeNotifier {
 
   List<String> messages = [];
   bool isTyping = false;
+  bool isUserOnline = false;
   Timer? typingTimer;
 
   ChatProvider(this.socketService) {
@@ -26,6 +27,11 @@ class ChatProvider extends ChangeNotifier {
 
     socketService.socket.on('stop_typing', (_) {
       isTyping = false;
+      notifyListeners();
+    });
+
+    socketService.socket.on('user_status', (data) {
+      isUserOnline = data['online'];
       notifyListeners();
     });
   }
