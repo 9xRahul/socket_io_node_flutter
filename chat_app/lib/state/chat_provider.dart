@@ -38,6 +38,8 @@ class ChatProvider extends ChangeNotifier {
 
   void sendMessage(String msg) {
     messages.add("Me: $msg");
+
+    
     socketService.sendMessage({'roomId': roomId, 'message': msg});
     notifyListeners();
   }
